@@ -289,3 +289,68 @@ This removes the specified column and its data from the table.
 ## Conclusion
 
 Understanding how to manage foreign key relationships and use the DROP command effectively is crucial for maintaining database integrity and structure. Always approach these operations with caution, especially in production environments, and ensure you understand the full implications of your actions.
+
+
+
+# Creating a Database Using SQL Server Management Studio Wizard
+
+## Using the SSMS Wizard
+
+1. Open SQL Server Management Studio (SSMS).
+2. In the Object Explorer, navigate to the "Databases" folder.
+3. Right-click on "Databases" and select "New Database".
+4. Name your database (e.g., "CompanyG02UsingWizard").
+5. Configure settings as needed or use defaults.
+6. Click "OK" to create the database.
+
+## Database Files
+
+When you create a database, two main files are generated:
+
+### 1. Data File (.mdf)
+- Contains the actual data and metadata of the database.
+- Stores information such as:
+  - Database name
+  - Owner
+  - Creation time
+  - Table names
+  - Column names
+- Usually one primary .mdf file, but can have multiple.
+- Default initial size: 8 MB
+- Default autogrowth: 64 MB (unlimited)
+
+### 2. Log File (.ldf)
+- Stores transaction logs.
+- Records all transactions (inserts, updates, deletes).
+- Used for database recovery and backups.
+- Usually one .ldf file per database.
+- Default initial size: 8 MB
+- Default autogrowth: 64 MB (unlimited)
+
+## Important Notes
+
+1. **File Customization**: You can modify the initial size and autogrowth settings for both .mdf and .ldf files.
+
+2. **Database Transfer**: 
+   - You can transfer a database by giving someone both .mdf and .ldf files.
+   - However, this requires stopping the database service and is not recommended.
+
+3. **Recommended Transfer Method**:
+   - Create a backup of the database.
+   - Share the backup file.
+   - The recipient can then restore the database from the backup.
+
+4. **Wizard vs. Code**: 
+   - The wizard provides a user-friendly interface for database creation.
+   - Behind the scenes, it generates and executes SQL code.
+
+5. **Backup Types**: 
+   - Various backup types exist, including log file backups.
+   - Log file backups can be used for point-in-time recovery.
+
+## Best Practices
+
+1. Regularly backup your databases.
+2. Use the backup and restore method for transferring databases when possible.
+3. Monitor and adjust file sizes and growth settings for optimal performance.
+4. Familiarize yourself with both the wizard interface and the underlying SQL commands for database management.
