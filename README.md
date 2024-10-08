@@ -95,6 +95,99 @@ The ALTER command is a powerful tool for modifying database structures. While th
 Always consider the implications of structural changes to your database, and follow best practices to ensure data integrity and system stability.
 
 
+# Employee and Department Table Structures and Relationships
+
+## Table Structures
+
+### Employee Table
+
+```sql
+Create Table Employees
+(
+    Id int Primary Key Identity(1, 1),
+    FName varchar(20) Not Null, --Required
+    LName varchar(20), -- Optional
+    BDate Date,
+    EmpAddress varchar(30) default 'Cairo',
+    Gender char(1),
+    Salary money,
+    SuperId int references Employees(Id), -- Self Relationship
+    DepartmentNumber int
+)
+```
+
+#### Fields:
+- **Id**: Integer, Primary Key, Auto-incrementing
+- **FName**: Varchar(20), Required (Not Null)
+- **LName**: Varchar(20), Optional
+- **BDate**: Date
+- **EmpAddress**: Varchar(30), Default value 'Cairo'
+- **Gender**: Char(1)
+- **Salary**: Money type
+- **SuperId**: Integer, Foreign Key referencing Employees(Id)
+- **DepartmentNumber**: Integer
+
+### Department Table
+
+Based on the diagram, the Department table likely has the following structure:
+
+```sql
+Create Table Department
+(
+    DNumber int Primary Key,
+    DName varchar(50),
+    MGRSSN int,
+    MGRStartDate Date
+)
+```
+
+#### Fields:
+- **DNumber**: Integer, Primary Key
+- **DName**: Varchar(50)
+- **MGRSSN**: Integer
+- **MGRStartDate**: Date
+
+## Relationships
+
+1. **Employee Self-Relationship**:
+   - The `SuperId` in the Employee table references the `Id` of another employee, representing a supervisory relationship.
+   - This creates a hierarchical structure within the Employees table.
+
+2. **Employee-Department Relationship**:
+   - The `DepartmentNumber` in the Employee table is a foreign key that references the `DNumber` in the Department table.
+   - This represents a many-to-one relationship: many employees can belong to one department.
+
+3. **Department-Employee (Manager) Relationship**:
+   - The `MGRSSN` in the Department table likely references the `SSN` (or possibly `Id`) of an employee in the Employee table.
+   - This represents the manager of the department, creating a one-to-one relationship between a department and its manager.
+
+## Notable Points
+
+1. **Primary Keys**: 
+   - Employee table uses an auto-incrementing `Id` as the primary key.
+   - Department table uses `DNumber` as the primary key.
+
+2. **Foreign Keys**:
+   - `SuperId` in Employees table (self-referencing)
+   - `DepartmentNumber` in Employees table
+   - `MGRSSN` in Department table
+
+3. **Default Values**:
+   - `EmpAddress` has a default value of 'Cairo'
+
+4. **Data Types**:
+   - Use of `varchar` for names and addresses
+   - `char(1)` for Gender, suggesting a single character code
+   - `money` type for Salary, ensuring proper handling of currency values
+
+5. **Constraints**:
+   - `FName` is marked as Not Null, making it a required field
+   - `LName` is optional
+
+This structure allows for a flexible representation of employees and departments, including hierarchical employee relationships and the association of employees with departments.
+
+
+
 # SQL: Foreign Keys and DROP Command
 
 ## 1. Foreign Key Relationships
