@@ -93,3 +93,106 @@ This diagram illustrates the flow of the ALTER TABLE command and its operations.
 The ALTER command is a powerful tool for modifying database structures. While this document focused on ALTER TABLE, remember that ALTER can be used on various database objects, with syntax and available operations varying depending on the object type.
 
 Always consider the implications of structural changes to your database, and follow best practices to ensure data integrity and system stability.
+
+
+# SQL: Foreign Keys and DROP Command
+
+## 1. Foreign Key Relationships
+
+### 1.1 Understanding Foreign Keys
+
+Foreign keys are used to establish relationships between tables in a relational database. In our example:
+
+- We have an Employees table and a Departments table.
+- This forms a one-to-many relationship: one department can have many employees.
+- The Employees table (the "many" side) has a foreign key that references the Departments table (the "one" side).
+
+### 1.2 Implementing Foreign Keys
+
+#### In Table Design:
+
+The foreign key relationship is represented as:
+
+```sql
+DepartmentNumber int REFERENCES Departments(DNumber)
+```
+
+#### Using ALTER TABLE:
+
+To add a foreign key constraint to an existing table:
+
+```sql
+ALTER TABLE Employees
+ADD FOREIGN KEY (DepartmentNumber) REFERENCES Departments(DNumber)
+```
+
+### 1.3 Visualizing Relationships in SSMS
+
+To view and manage relationships in SQL Server Management Studio (SSMS):
+
+1. Open your database diagram in SSMS.
+2. Locate the relationship line between Employees and Departments tables.
+3. Right-click on the relationship line.
+4. Select "Properties" from the context menu.
+5. Review the relationship details in the Properties window.
+
+Note: Always save your diagram before making changes.
+
+To refresh the diagram after making changes:
+1. Close the current diagram window.
+2. Right-click on "Database Diagrams" in the Object Explorer.
+3. Select "Refresh".
+4. Reopen your diagram to see the updates.
+
+## 2. The DROP Command
+
+The DROP command is used to remove database objects entirely. It's a powerful command that should be used with caution.
+
+### 2.1 Dropping a Database
+
+To remove an entire database:
+
+```sql
+DROP DATABASE CompanyG02
+```
+
+Warning: This will delete all tables, data, and other objects within the database.
+
+### 2.2 Dropping a Table
+
+To remove a specific table:
+
+```sql
+DROP TABLE Employees 
+```
+
+Caution: This will delete the table structure and all data within the table.
+
+### 2.3 Dropping a Column
+
+Unlike dropping databases or tables, dropping a column requires the ALTER TABLE command:
+
+```sql
+ALTER TABLE Employees
+DROP COLUMN ColumnName
+```
+
+This removes the specified column and its data from the table.
+
+## 3. Best Practices and Considerations
+
+1. **Backup**: Always create a backup before performing DROP or ALTER operations, especially in production environments.
+
+2. **Dependencies**: Before dropping objects, check for dependencies. Dropping a table or column might affect views, indexes, or constraints.
+
+3. **Cascading Effects**: Be aware of cascading delete rules when dropping tables with foreign key relationships.
+
+4. **Testing**: Test DROP and ALTER operations in a development environment before applying them to production.
+
+5. **Permissions**: Ensure you have the necessary permissions to perform these operations.
+
+6. **Documentation**: Keep your database schema documentation up-to-date after making structural changes.
+
+## Conclusion
+
+Understanding how to manage foreign key relationships and use the DROP command effectively is crucial for maintaining database integrity and structure. Always approach these operations with caution, especially in production environments, and ensure you understand the full implications of your actions.
