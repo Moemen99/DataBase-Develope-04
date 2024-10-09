@@ -424,3 +424,82 @@ The table design view opens with three columns:
 | DepartmentNumber  | int          | ☑           |
 
 Note: ☐ indicates "Not Null", ☑ indicates "Allow Null"
+
+
+
+
+
+
+# Creating Tables and Relationships in SQL Server Management Studio
+
+## Table Structures
+
+### Departments Table
+| Column Name  | Data Type   | Allow Nulls |
+|--------------|-------------|-------------|
+| DNumber      | int         | ☐           |
+| DName        | varchar(50) | ☐           |
+| ManagerId    | int         | ☑           |
+| MGRStartDate | date        | ☑           |
+
+### Employees Table
+| Column Name       | Data Type   | Allow Nulls |
+|-------------------|-------------|-------------|
+| Id                | int         | ☐           |
+| FName             | varchar(50) | ☐           |
+| LName             | varchar(50) | ☑           |
+| BDate             | date        | ☑           |
+| Salary            | money       | ☑           |
+| Address           | varchar(50) | ☑           |
+| Gender            | char(1)     | ☑           |
+| SupervisorId      | int         | ☑           |
+| DepartmentNumber  | int         | ☑           |
+
+### Junction Table (for multivalued attributes)
+| Column Name       | Data Type | Allow Nulls |
+|-------------------|-----------|-------------|
+| DepartmentNumber  | int       | ☑           |
+| Location          | int       | ☑           |
+
+Note: ☐ indicates "Not Null", ☑ indicates "Allow Null"
+
+## Creating Composite Primary Keys
+
+For tables with multivalued attributes (like the junction table):
+
+1. Click on the first column you want in the composite key.
+2. Hold Ctrl and click on the other column(s) you want to include.
+3. Right-click on the selected columns and choose "Set Primary Key".
+
+## Creating Relationships Using Database Diagram
+
+1. Right-click on "Database Diagrams" in your database.
+2. Select "New Database Diagram".
+3. Choose the tables you want to include (e.g., Departments, Employees, and the junction table).
+4. Click "Add" to add the selected tables to the diagram.
+
+### Creating a Self-Relationship (Employees table)
+
+1. Drag the primary key column (Id) from the Employees table to the SupervisorId column in the same table.
+2. In the "Create Relationship" dialog:
+   - Verify the relationship name
+   - Confirm the primary key and foreign key tables
+   - Click "OK"
+3. In the "Foreign Key Relationship" dialog:
+   - Review the default configuration
+   - Click "OK" to create the relationship
+
+This creates a self-relationship where SupervisorId references the Id of another employee.
+
+### Creating Other Relationships
+
+Follow a similar process for other relationships:
+- Drag the primary key from one table to the corresponding foreign key in another table.
+- Configure the relationship as needed in the dialogs that appear.
+
+## Important Notes
+
+- Ensure that foreign key columns have the same data type as the primary key columns they reference.
+- The values in foreign key columns (e.g., SupervisorId) must correspond to existing values in the referenced primary key column.
+- Use the database diagram to visualize and manage relationships between tables.
+- You can modify relationships after creation, but be cautious with existing data.
