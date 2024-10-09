@@ -503,3 +503,36 @@ Follow a similar process for other relationships:
 - The values in foreign key columns (e.g., SupervisorId) must correspond to existing values in the referenced primary key column.
 - Use the database diagram to visualize and manage relationships between tables.
 - You can modify relationships after creation, but be cautious with existing data.
+
+
+
+
+# Key Points: Relationships and SSMS Options in SQL Server Management Studio
+
+## Viewing Relationship Properties
+
+1. Right-click on the relationship line in the database diagram.
+2. Select "Properties" to view the Tables and Columns Specification.
+3. This shows details like Foreign Key Base Table, Foreign Key Columns, and corresponding Primary/Unique Key information.
+
+## Important Notes
+
+- Unsaved changes are indicated by an asterisk (*) in the tab name.
+- Review properties before saving to ensure correct relationship configuration.
+
+## SSMS Options for Table Designer
+
+To access: Tools > Options > Designers > Table and Database Designers
+
+Key option to note:
+- "Prevent saving changes that require table re-creation" 
+  - When unchecked, allows changes that might require recreating tables.
+  - Use with caution, especially in production environments.
+
+## Wizard Interface for DDL
+
+- The SSMS wizard provides a graphical interface for Data Definition Language (DDL) operations.
+- It offers a user-friendly way to manage database structures and relationships.
+- Understanding the implications of each option is crucial, especially for production databases.
+
+Remember: While the wizard interface is convenient, it's important to understand the underlying SQL operations it generates and their potential impacts on your database structure and data.
