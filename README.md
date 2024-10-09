@@ -354,3 +354,73 @@ When you create a database, two main files are generated:
 2. Use the backup and restore method for transferring databases when possible.
 3. Monitor and adjust file sizes and growth settings for optimal performance.
 4. Familiarize yourself with both the wizard interface and the underlying SQL commands for database management.
+
+
+# Creating a Table Using SQL Server Management Studio GUI
+
+## Steps to Create a New Table
+
+1. Right-click on "Tables" in your database.
+2. Select "New Table" from the context menu.
+
+## Designing the Table
+
+The table design view opens with three columns:
+- Column Name
+- Data Type
+- Allow Nulls
+
+### Adding Columns
+
+1. Click in the "Column Name" field and enter the name.
+2. Use the drop-down in "Data Type" to select the appropriate type.
+3. Check or uncheck "Allow Nulls" as needed.
+4. Use Tab to move forward, Shift+Tab to move backward between fields.
+
+### Setting the Primary Key
+
+1. Right-click on the column you want as the primary key (e.g., "Id").
+2. Choose "Set Primary Key" from the context menu.
+
+### Adding Identity Specification
+
+1. Click on the primary key column (e.g., "Id").
+2. In the Properties window below:
+   - Find "Identity Specification"
+   - Set "Is Identity" to "Yes"
+   - Adjust "Identity Seed" and "Identity Increment" if needed (default is 1,1)
+
+### Setting Default Values
+
+1. Click on the column you want to set a default value for (e.g., "Address").
+2. In the Properties window:
+   - Find "Default Value or Binding"
+   - Enter the default value (e.g., 'Cairo')
+
+## Saving the Table
+
+1. Press Ctrl + S or click the Save icon.
+2. Enter a name for your table (e.g., "Employees").
+3. Click "OK" to save.
+
+## Important Notes
+
+- Changes are not saved automatically. Look for an asterisk (*) in the tab name to indicate unsaved changes.
+- Always review your table design before saving to ensure all specifications are correct.
+- You can modify the table design later, but some changes might require dropping and recreating the table if it contains data.
+
+## Table Structure (Based on the Image)
+
+| Column Name       | Data Type    | Allow Nulls |
+|-------------------|--------------|-------------|
+| Id                | int          | ☐           |
+| FName             | varchar(50)  | ☐           |
+| LName             | varchar(50)  | ☑           |
+| BDate             | date         | ☑           |
+| Salary            | money        | ☑           |
+| Address           | varchar(50)  | ☑           |
+| Gender            | char(1)      | ☑           |
+| SupervisorId      | int          | ☑           |
+| DepartmentNumber  | int          | ☑           |
+
+Note: ☐ indicates "Not Null", ☑ indicates "Allow Null"
